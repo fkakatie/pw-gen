@@ -16,32 +16,27 @@ const symbols = [
 
 const numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
 
-let validLength = false;
-let validCharacters = false;
+let defaultLength;
 
 const collectPasswordCriteria = () => {
-  let length;
-  let characters;
-  if (!validLength) {
-    length = collectLength();
-    console.log(`length:`, length);
-  }
-  if (!validCharacters) {
-    characters = collectCharacters();
-    console.log(`charas:`, characters);
-  }
+  let length = collectLength();
+  let characters = collectCharacters();
+  let chosenCharacters = removeFalseKeys(characters);
+  console.log(`length:`, length);
+  console.log(`charas:`, chosenCharacters);
+  generatePassword(length, chosenCharacters);
 }
 
 const collectLength = () => {
-  let lengthInput = prompt(`What is your desired password length?`);
-  let length = validateLength(lengthInput);
-  return length;
+  let lengthInput = prompt(`What is your desired password length?`, defaultLength);
+  let validLength = validateLength(lengthInput);
+  return validLength;
 }
 
-const validateLength = (length) => {
+const validateLength = length => {
   let parsedLength = parseInt(length);
   if (parsedLength >= 8 && parsedLength <= 128) {
-    validLength = true;
+    defaultLength = parsedLength;
     return parsedLength;
   } else {
     alert(`Password must contain between 8 - 128 characters.`);
@@ -58,24 +53,48 @@ const collectCharacters = () => {
     confirm(`Would you like to include numbers in your password?`)
   let specInput = 
     confirm(`Would you like to include special characters in your password?`)
-  let characters = {
+  let charactersObj = {
     lower: lowerInput,
     upper: upperInput,
     num: numInput,
     spec: specInput
-  } 
-  let passwordCharacters = validateCharacters(characters);
-  return characters;
+  };
+  let passwordCharacters = validateCharacters(charactersObj);
+  return passwordCharacters;
 }
 
-const validateCharacters = (characters) => {
+const validateCharacters = characters => {
   if (Object.values(characters).indexOf(true) > -1) {
-    validCharacters = true;
     return characters;
   } else {
     alert(`Password must contain at least one category of characters (lowercase letters, uppercase letters, numbers, and/or special characters).`);
     collectPasswordCriteria();
   }
+}
+
+const removeFalseKeys = characters => {
+  /* Remove key where value is false in JavaScript source: 
+      https://stackoverflow.com/questions/39505409/remove-key-where-value-is-false-in-javascript
+  */
+  Object.keys(characters).forEach(key => {
+    if (characters[key] === false) {
+      delete characters[key];
+    }
+  });
+  let chosenCharacters = Object.keys(characters);
+  return chosenCharacters; 
+}
+
+const generatePassword = (len, chars) => {
+  console.log(len);
+  console.log(chars);
+}
+
+/* Getting a random number between two values source:
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+*/
+const genRandomNumber = (min, max) => {
+  return (Math.random() * (max - min)) + min;
 }
 
 // Assignment Code
