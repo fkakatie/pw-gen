@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2020 @fkakatie
+Copyright (c) 2020 [@fkakatie](https://github.com/fkakatie)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
