@@ -2,6 +2,8 @@
 
 ![GitHub Top Language](https://img.shields.io/github/languages/top/fkakatie/pw-gen) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
+![Password Generator screenshot](assets/images/screenshot.png)
+
 [**Password Generator**](https://fkakatie.github.io/pw-gen/) is an application that generates a random, strong password based on user-selected criteria. :lock:
 
 This app runs in the browser and features dynamically updated HTML powered by JavaScript. User input is collected via browser prompts and confirms. This app is responsive, ensuring that it adapts to multiple screen sizes.
