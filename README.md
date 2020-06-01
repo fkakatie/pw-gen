@@ -6,7 +6,7 @@
 
 This app runs in the browser and features dynamically updated HTML powered by JavaScript. User input is collected via browser prompts and confirms. This app is responsive, ensuring that it adapts to multiple screen sizes.
 
-[![This project is hosted on GitHub Pages](https://img.shields.io/badge/This%20project%20is%20hosted%20on-GitHub%20Pages-red?style=for-the-badge&logo=github)](https://fkakatie.github.io/pw-gen/)
+[![This project is hosted on GitHub Pages](https://img.shields.io/badge/This%20project%20is%20hosted%20on-GitHub%20Pages-black?style=for-the-badge&logo=github)](https://fkakatie.github.io/pw-gen/)
 
 ### Table of Contents
 
