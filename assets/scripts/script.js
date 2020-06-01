@@ -185,13 +185,23 @@ const shuffleArr = arr => {
 
 // Write password to the #password input
 const writePassword = password => {
-  let passwordText = document.querySelector(`#password`);
-  passwordText.value = password;
+  let $passwordText = document.querySelector(`#password`);
+  $passwordText.value = password;
+}
+
+const writeCopyYear = () => {
+  let year = new Date().getFullYear();
+  if (year > 2019) {
+    let decade = year.toString().slice(-2);
+    const $copySpan = document.querySelector(`#copy-year`);
+    $copySpan.textContent = `-${decade}`;
+  }
 }
 
 // Assignment Code
 document.addEventListener(`DOMContentLoaded`, () => {
-  var generateBtn = document.querySelector(`#generate`);
+  writeCopyYear();
+  const $generateBtn = document.querySelector(`#generate`);
   // Add event listener to generate button
-  generateBtn.addEventListener(`click`, collectPasswordCriteria);
+  $generateBtn.addEventListener(`click`, collectPasswordCriteria);
 });
