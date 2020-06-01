@@ -16,6 +16,8 @@ This app runs in the browser and features dynamically updated HTML powered by Ja
 - [Contributing](#contributing)
 - [Contact](#contact)
 
+---
+
 ## How to Use
 
 1. Open [**Password Generator**](https://fkakatie.github.io/pw-gen/).
