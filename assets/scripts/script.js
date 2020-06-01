@@ -1,5 +1,3 @@
-`use strict`;
-
 const alphabet = [
   `a`, `b`, `c`, `d`, `e`, 
   `f`, `g`, `h`, `i`, `j`, 
@@ -19,16 +17,19 @@ const numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
 let defaultLength;
 
 const collectPasswordCriteria = () => {
-  let length = collectLength();
+  let length;
+  if (defaultLength) {
+    length = defaultLength;
+  } else {
+    length = collectLength();
+  }
   let characters = collectCharacters();
   let chosenCharacters = removeFalseKeys(characters);
-  console.log(`length:`, length);
-  console.log(`charas:`, chosenCharacters);
   generatePassword(length, chosenCharacters);
 }
 
 const collectLength = () => {
-  let lengthInput = prompt(`What is your desired password length?`, defaultLength);
+  let lengthInput = prompt(`What is your desired password length?`);
   let validLength = validateLength(lengthInput);
   return validLength;
 }
@@ -86,28 +87,111 @@ const removeFalseKeys = characters => {
 }
 
 const generatePassword = (len, chars) => {
-  console.log(len);
-  console.log(chars);
+  let characterArr = [];
+  // ensure at least one of each checked character is included
+  for (let i = 0; i < chars.length; i++) {
+    switch (chars[i]) {
+      case `lower`:
+        let randomLowerI = genRandomNumber(0, alphabet.length);
+        pushToArr(characterArr, alphabet, randomLowerI);
+        break;
+      case `upper`:
+        let randomUpperI = genRandomNumber(0, alphabet.length);
+        pushToArr(characterArr, alphabet, randomUpperI, `upper`);
+        break;
+      case `num`:
+        let randomNumI = genRandomNumber(0, numbers.length);
+        pushToArr(characterArr, numbers, randomNumI);
+        break;
+      case `spec`:
+        let randomSpecI = genRandomNumber(0, symbols.length);
+        pushToArr(characterArr, symbols, randomSpecI);
+        break;
+      default:
+        break;
+    }
+  }
+  let remainingChars = len - chars.length;
+  for (let j = 0; j < remainingChars; j++) {
+    let randomNum = genRandomNumber(0, chars.length);
+    let thisKey = chars[randomNum];
+    switch (thisKey) {
+      case `lower`:
+        let randomLowerI = genRandomNumber(0, alphabet.length);
+        pushToArr(characterArr, alphabet, randomLowerI);
+        break;
+      case `upper`:
+        let randomUpperI = genRandomNumber(0, alphabet.length);
+        pushToArr(characterArr, alphabet, randomUpperI, `upper`);
+        break;
+      case `num`:
+        let randomNumI = genRandomNumber(0, numbers.length);
+        pushToArr(characterArr, numbers, randomNumI);
+        break;
+      case `spec`:
+        let randomSpecI = genRandomNumber(0, symbols.length);
+        pushToArr(characterArr, symbols, randomSpecI);
+        break;
+      default:
+        break;
+    }
+  }
+  // console.log(characterArr);
+  let shuffledArr = shuffleArr(characterArr);
+  let pwStr = shuffledArr.join(``);
+  // console.log(shuffledArr);
+  defaultLength = ``;
+  writePassword(pwStr);
+}
+
+const pushToArr = (pwArr, charArr, i, upper) => {
+  if (upper) {
+    pwArr.push(charArr[i].toUpperCase());
+  } else {
+    pwArr.push(charArr[i]);
+  }
 }
 
 /* Getting a random number between two values source:
     https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 */
 const genRandomNumber = (min, max) => {
-  return (Math.random() * (max - min)) + min;
+  return Math.floor((Math.random() * (max - min)) + min);
+}
+
+/* Knuth Shuffle source:
+    https://github.com/Daplie/knuth-shuffle/blob/master/index.js
+*/
+const shuffleArr = arr => {
+  let currentIndex = arr.length;
+  let temporaryValue;
+  let randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = arr[currentIndex];
+      arr[currentIndex] = arr[randomIndex];
+      arr[randomIndex] = temporaryValue;
+    }
+
+    return arr;
+}
+
+// Write password to the #password input
+const writePassword = password => {
+  let passwordText = document.querySelector(`#password`);
+  passwordText.value = password;
 }
 
 // Assignment Code
-var generateBtn = document.querySelector(`#generate`);
-
-// Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector(`#password`);
-
-//   passwordText.value = password;
-
-// }
-
-// Add event listener to generate button
-generateBtn.addEventListener(`click`, collectPasswordCriteria);
+document.addEventListener(`DOMContentLoaded`, () => {
+  var generateBtn = document.querySelector(`#generate`);
+  // Add event listener to generate button
+  generateBtn.addEventListener(`click`, collectPasswordCriteria);
+});
