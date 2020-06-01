@@ -1,6 +1,4 @@
-# Password Generator 
-
-![GitHub Top Language](https://img.shields.io/github/languages/top/fkakatie/pw-gen) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+# Password Generator ![GitHub Top Language](https://img.shields.io/github/languages/top/fkakatie/pw-gen) [![License: MIT](https://img.shields.io/badge/License-MIT-A31F34.svg)](https://opensource.org/licenses/MIT)
 
 ![Password Generator screenshot](assets/images/screenshot.png)
 
@@ -46,7 +44,7 @@ This project is licensed under the terms of the [MIT license](LICENSE.md).
 
 ## Contributing
 
-If you would like to contribute to this simple project, please [open an issue](https://github.com/fkakatie/pw-gen/issues/new/choose). 
+If you would like to contribute to this simple project, [open an issue](https://github.com/fkakatie/pw-gen/issues/new/choose) or [resolve one](https://github.com/fkakatie/pw-gen/issues). 
 
 ## Contact
 
