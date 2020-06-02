@@ -191,7 +191,7 @@ const writePassword = password => {
 
 const writeCopyYear = () => {
   let year = new Date().getFullYear();
-  if (year > 2019) {
+  if (year > 2020) {
     let decade = year.toString().slice(-2);
     const $copySpan = document.querySelector(`#copy-year`);
     $copySpan.textContent = `-${decade}`;
