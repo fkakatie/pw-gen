@@ -17,31 +17,32 @@ const numbers = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
 let defaultLength;
 
 const collectPasswordCriteria = () => {
-  let length;
-  if (defaultLength) {
-    length = defaultLength;
-  } else {
-    length = collectLength();
-  }
+  let length = collectLength();
   let characters = collectCharacters();
-  let chosenCharacters = removeFalseKeys(characters);
-  generatePassword(length, chosenCharacters);
+  if (!length || !characters ) {
+    collectPasswordCriteria();
+  } else {
+    let chosenCharacters = removeFalseKeys(characters);
+    generatePassword(length, chosenCharacters);
+  }
 }
 
 const collectLength = () => {
-  let lengthInput = prompt(`What is your desired password length?`);
+  let lengthInput = prompt(`What is your desired password length?`, defaultLength);
   let validLength = validateLength(lengthInput);
   return validLength;
 }
 
 const validateLength = length => {
-  let parsedLength = parseInt(length);
+  let parsedLength = Math.round(parseInt(length));
   if (parsedLength >= 8 && parsedLength <= 128) {
     defaultLength = parsedLength;
+
     return parsedLength;
   } else {
     alert(`Password must contain between 8 - 128 characters.`);
-    collectPasswordCriteria();
+    // collectPasswordCriteria();
+    return false;
   }
 }
 
@@ -69,7 +70,8 @@ const validateCharacters = characters => {
     return characters;
   } else {
     alert(`Password must contain at least one category of characters (lowercase letters, uppercase letters, numbers, and/or special characters).`);
-    collectPasswordCriteria();
+    // collectPasswordCriteria();
+    return false;
   }
 }
 
@@ -136,10 +138,10 @@ const generatePassword = (len, chars) => {
         break;
     }
   }
-  // console.log(characterArr);
+  /
   let shuffledArr = shuffleArr(characterArr);
   let pwStr = shuffledArr.join(``);
-  // console.log(shuffledArr);
+  /
   defaultLength = ``;
   writePassword(pwStr);
 }
