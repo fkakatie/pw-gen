@@ -138,10 +138,10 @@ const generatePassword = (len, chars) => {
         break;
     }
   }
-  /
+  
   let shuffledArr = shuffleArr(characterArr);
   let pwStr = shuffledArr.join(``);
-  /
+  
   defaultLength = ``;
   writePassword(pwStr);
 }
